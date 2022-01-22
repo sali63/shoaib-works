@@ -1,7 +1,36 @@
-import 'tailwindcss/tailwind.css'
+import App from 'next/app';
+import 'tailwindcss/tailwind.css';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import Layout from './../components/Layout';
+import AppProvider from '../contexts/AppContext';
+import { createClient } from 'contentful';
+
+function MyApp({ Component, pageProps, appData, _appData }) {
+  return (
+    <AppProvider appData={appData} _appData={_appData}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AppProvider>
+  );
 }
 
-export default MyApp
+MyApp.getInitialProps = async (appContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appContext);
+
+  const client = createClient({
+    space: process.env.CONTENTFUL.SPACE_ID,
+    accessToken: process.env.CONTENTFUL.ACCESS_TOKEN,
+  });
+
+  const { items } = await client.getEntries({ content_type: 'app' });
+
+  // get all the items from Contenful
+  const { items: _appData } = await client.getEntries();
+
+  const appData = items[0].fields;
+  return { ...appProps, appData, _appData };
+};
+
+export default MyApp;
