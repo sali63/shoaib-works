@@ -165,8 +165,8 @@ export default function Project({ currProjectData, beforeAfterProjects }) {
 
 export async function getStaticPaths() {
   const client = createClient({
-    space: process.env.CONTENTFUL.SPACE_ID,
-    accessToken: process.env.CONTENTFUL.ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
   const { items: webProjects } = await client.getEntries({
@@ -197,8 +197,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const client = createClient({
-    space: process.env.CONTENTFUL.SPACE_ID,
-    accessToken: process.env.CONTENTFUL.ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
   const { items: webProjects } = await client.getEntries({
@@ -209,6 +209,8 @@ export async function getStaticProps({ params }) {
   const currProjectData = webProjects.filter((project) => {
     return project.fields.projectName === params.id;
   });
+
+  console.log(currProjectData);
 
   const indexCurrProject = webProjects.indexOf(currProjectData);
 

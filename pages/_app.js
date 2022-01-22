@@ -20,8 +20,8 @@ MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
 
   const client = createClient({
-    space: process.env.CONTENTFUL.SPACE_ID,
-    accessToken: process.env.CONTENTFUL.ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
   // get all the items from Contenful

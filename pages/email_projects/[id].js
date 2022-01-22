@@ -125,8 +125,8 @@ export default Project;
 
 export async function getStaticPaths() {
   const client = createClient({
-    space: process.env.CONTENTFUL.SPACE_ID,
-    accessToken: process.env.CONTENTFUL.ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
   const { items: emailProjects } = await client.getEntries({
@@ -150,8 +150,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const client = createClient({
-    space: process.env.CONTENTFUL.SPACE_ID,
-    accessToken: process.env.CONTENTFUL.ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
   const { items: emailProjects } = await client.getEntries({

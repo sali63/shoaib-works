@@ -4,9 +4,7 @@ module.exports = {
   },
   env: {
     DB_ENDPOINT: 'https://shoaib-works-strapi.herokuapp.com',
-    CONTENTFUL: {
-      SPACE_ID: '53249e4foyk0',
-      ACCESS_TOKEN: 'gKvL00yScZgwP8eB7eQ1LjrGYpjuNVA0goQLhnIPHpk',
-    },
+    CONTENTFUL_SPACE_ID: '53249e4foyk0',
+    CONTENTFUL_ACCESS_TOKEN: 'gKvL00yScZgwP8eB7eQ1LjrGYpjuNVA0goQLhnIPHpk',
   },
 };
