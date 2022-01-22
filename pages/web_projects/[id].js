@@ -8,7 +8,7 @@ import PrimaryButton from './../../components/PrimaryButton';
 import { ProjectNavigate } from './../../components/ProjectNavigate';
 import Logo from '../../components/Logo';
 
-export default function Project({ currProjectData, beforeAfterProjects }) {
+export default function Project({ currProjectData = [], beforeAfterProjects }) {
   const {
     fields: {
       projectName,
