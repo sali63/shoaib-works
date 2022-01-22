@@ -12,11 +12,9 @@ export default function Home({ homepageData, testItems }) {
       <Head>
         <title>Create Next App</title>
       </Head>
-      <HomepageProvider homepageData={homepageData}>
-        <IntroBanner />
-        <AboutMe />
-        <Projects />
-      </HomepageProvider>
+      <IntroBanner />
+      <AboutMe />
+      <Projects />
     </div>
   );
 }

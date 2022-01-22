@@ -24,13 +24,10 @@ MyApp.getInitialProps = async (appContext) => {
     accessToken: process.env.CONTENTFUL.ACCESS_TOKEN,
   });
 
-  const { items } = await client.getEntries({ content_type: 'app' });
-
   // get all the items from Contenful
   const { items: _appData } = await client.getEntries();
 
-  const appData = items[0].fields;
-  return { ...appProps, appData, _appData };
+  return { ...appProps, _appData };
 };
 
 export default MyApp;
