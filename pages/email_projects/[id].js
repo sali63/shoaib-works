@@ -38,7 +38,7 @@ export const Project = ({
         },
       },
     },
-  } = currProjectData[0];
+  } = currProjectData && currProjectData[0];
 
   const handleClick = (id) => {
     id === 'mobile' ? setIsMobTab(true) : setIsMobTab(false);

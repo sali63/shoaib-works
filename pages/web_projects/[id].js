@@ -18,7 +18,7 @@ export default function Project({ currProjectData, beforeAfterProjects }) {
       longDescription: projectBackground,
       previewImages,
     },
-  } = currProjectData[0];
+  } = currProjectData && currProjectData[0];
   const [prevProject, nextProject] = beforeAfterProjects;
   const [hero, previewOne, previewTwo] = previewImages;
   const {
@@ -77,11 +77,21 @@ export default function Project({ currProjectData, beforeAfterProjects }) {
 
         <div className='2xl:grid 2xl:grid-cols-2 2xl:pt-20 2xl:grid-rows-portfolio-layout'>
           <div className='2xl:pr-32'>
-            <article className='mt-8 pt-6 pb-5 2xl:pt-10 2xl:pb-8 border-t-2 border-b-2 border-secondary-gray md:grid grid-cols-2 2xl:grid-cols-1'>
-              <h2 className='font-titillium-web text-primary-blue font-bold text-3xl capitalize'>
+            <article
+              className='mt-8 pt-6 pb-5 2xl:pt-10 2xl:pb-8 border-t-2 border-b-2\
+             border-secondary-gray md:grid grid-cols-2 2xl:grid-cols-1'
+            >
+              <h2
+                className='font-titillium-web text-primary-blue font-bold text-3xl \
+              capitalize'
+              >
                 {projectName}
               </h2>
-              <p className='font-poppins pt-4 pb-4 2xl:pb-4 text-primary-blue text-opacity-60 text-sm laptop-lg:text-base leading-7 laptop-lg:leading-9 row-span-5'>
+              <p
+                className='font-poppins pt-4 pb-4 2xl:pb-4 text-primary-blue \
+               text-opacity-60 text-sm laptop-lg:text-base leading-7 laptop-lg:leading-9 \
+               row-span-5'
+              >
                 {desc}
               </p>
               <div className='md:pt-6'>
@@ -91,7 +101,10 @@ export default function Project({ currProjectData, beforeAfterProjects }) {
                     return `${category} ${slash && slash} `;
                   })}
                 </p> */}
-                <p className='font-poppins pt-6 font-bold text-xs laptop-lg:text-sm text-primary-purple-dark uppercase'>
+                <p
+                  className='font-poppins pt-6 font-bold text-xs laptop-lg:text-sm \
+                 text-primary-purple-dark uppercase'
+                >
                   {tags.map((tag, index, arr) => {
                     const slash = (index !== arr.length - 1 && '/') || '';
                     return `${tag} ${slash && slash} `;
@@ -173,14 +186,7 @@ export async function getStaticPaths() {
     content_type: 'webProject',
     select: 'fields.projectName',
   });
-  //   return this shape
-  //   [
-  //       {
-  //           params:{
-  //               id: 'manage'
-  //           }
-  //       }
-  //   ]
+
   const paths = webProjects.map((project) => {
     const {
       fields: { projectName },
