@@ -24,8 +24,8 @@ export { useGlobalContext };
 
 export async function getStaticProps() {
   const client = createClient({
-    space: process.env.CONTENTFUL.SPACE_ID,
-    accessToken: process.env.CONTENTFUL.ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
   const { items } = await client.getEntries();
