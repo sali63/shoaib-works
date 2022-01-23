@@ -85,7 +85,7 @@ export const Project = ({
 
                 <div className='-z-10 top-0 h-full overflow-y-scroll rounded-2xl custom-scrollbar'>
                   <Image
-                    src={'https://' + mobScrollUrl}
+                    src={'https:' + mobScrollUrl}
                     width={mobScrollImgW}
                     height={mobScrollImgH}
                   />
@@ -106,7 +106,7 @@ export const Project = ({
             <div className='w-full'>
               <div className='  max-h-[662px] overflow-y-scroll custom-scrollbar'>
                 <Image
-                  src={'https://' + desktopScrollUrl}
+                  src={'https:' + desktopScrollUrl}
                   width={desktopScrollImgW}
                   height={desktopScrollImgH}
                 />

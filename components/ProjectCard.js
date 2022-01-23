@@ -40,7 +40,7 @@ export default function ProjectCard({
           >
             <div className='mb-4 md:self-center md:m-0 md:w-1/2 md:px-4'>
               <Image
-                src={'https://' + url}
+                src={'https:' + url}
                 width={width}
                 height={height}
                 alt={description}
