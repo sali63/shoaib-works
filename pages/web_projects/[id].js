@@ -8,7 +8,10 @@ import PrimaryButton from './../../components/PrimaryButton';
 import { ProjectNavigate } from './../../components/ProjectNavigate';
 import Logo from '../../components/Logo';
 
-export default function Project({ currProjectData = [], beforeAfterProjects }) {
+export default function Project({
+  currProjectData = null,
+  beforeAfterProjects,
+}) {
   const {
     fields: {
       projectName,
@@ -18,7 +21,8 @@ export default function Project({ currProjectData = [], beforeAfterProjects }) {
       longDescription: projectBackground,
       previewImages,
     },
-  } = currProjectData && currProjectData[0];
+  } = currProjectData[0] && currProjectData[0];
+
   const [prevProject, nextProject] = beforeAfterProjects;
   const [hero, previewOne, previewTwo] = previewImages;
   const {
@@ -198,7 +202,9 @@ export async function getStaticPaths() {
     };
   });
 
-  return { paths, fallback: true };
+  // Make sure your component handles fallback if it is enabled in getStaticPaths. Fallback docs
+  // Phew this was the problem
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
@@ -216,7 +222,7 @@ export async function getStaticProps({ params }) {
     return project.fields.projectName === params.id;
   });
 
-  console.log(currProjectData);
+  // console.log(currProjectData);
 
   const indexCurrProject = webProjects.indexOf(currProjectData);
 

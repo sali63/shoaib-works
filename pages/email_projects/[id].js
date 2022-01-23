@@ -12,7 +12,7 @@ import Image from 'next/image';
 
 //Uncomment below and the closing parenthesis if trying to use ref in Next.js
 export const Project = ({
-  currProjectData = [],
+  currProjectData = null,
 }) /*React.forwardRef(({ currProjectData }, ref)*/ => {
   const [isMobTab, setIsMobTab] = React.useState(true);
   const {
@@ -38,7 +38,7 @@ export const Project = ({
         },
       },
     },
-  } = currProjectData && currProjectData[0];
+  } = currProjectData[0] && currProjectData[0];
 
   const handleClick = (id) => {
     id === 'mobile' ? setIsMobTab(true) : setIsMobTab(false);
@@ -144,8 +144,9 @@ export async function getStaticPaths() {
       },
     };
   });
-
-  return { paths, fallback: true };
+  // Make sure your component handles fallback if it is enabled in getStaticPaths. Fallback docs
+  // Phew this was the problem
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
