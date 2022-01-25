@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import PrimaryButton from './PrimaryButton';
+import React from 'react';
 
 import ReactMarkdown from 'react-markdown';
 
@@ -24,14 +25,26 @@ export default function ProjectCard({
   web,
   isOdd,
 }) {
+  const [isModal, setIsModal] = React.useState(false);
+
+  const openModal = () => {
+    setTimeout(() => {
+      setIsModal(true);
+    }, 100);
+  };
+
   return (
     <>
       <article
-        className={`font-poppins overflow-hidden group  
+        className={`font-poppins overflow-hidden group \
+        
         ${web && 'w-full shadow-none'}
         ${!web && 'max-h-[500px]'}
         `}
+        onMouseEnter={() => openModal()}
+        onMouseLeave={() => setIsModal(false)}
       >
+        {/* WEB */}
         {web && (
           <div
             className={`md:flex md:justify-between w-11/12 md:w-full mx-auto ${
@@ -65,7 +78,9 @@ export default function ProjectCard({
             </div>
           </div>
         )}
+        {/* WEB ENDS */}
 
+        {/* EMAIL */}
         {!web && (
           <div className='mx-auto relative'>
             <Image
@@ -75,18 +90,22 @@ export default function ProjectCard({
               alt={description}
               className='md:group-hover:scale-105 duration-200 delay-150 transition-all'
             />
-
+            {/* MODAL */}
+            {/* {isModal && ( */}
             <div
-              className='absolute z-20 flex flex-col justify-center items-center opacity-0 \
-                          group-hover:opacity-100 transition-all \
-                          duration-300 left-0 top-0 \ 
-                        bg-primary-blue bg-opacity-30 w-full h-full'
+              className={`absolute z-20 flex flex-col justify-center items-center \
+                          opacity-0 ${isModal && 'opacity-100'} \
+                          transition-all duration-300 \
+                          left-0 top-0 \ 
+                          bg-primary-blue bg-opacity-30 w-full h-full`}
             >
               {/* Preview Btn */}
               <Link href={`email_projects/${projectName}`}>
                 <PrimaryButton
                   btnText='Preview'
-                  className='capitalize my-3'
+                  className={`capitalize my-3 pointer-events-none ${
+                    isModal && 'pointer-events-auto'
+                  }`}
                   defaultHover={false}
                 />
               </Link>
@@ -96,13 +115,17 @@ export default function ProjectCard({
               <Link href={siteUrl} passHref>
                 <PrimaryButton
                   btnText='view in browser'
-                  additionalClasses='capitalize my-3'
+                  additionalClasses={`capitalize my-3 pointer-events-none ${
+                    isModal && 'pointer-events-auto'
+                  }`}
                   defaultHover={false}
                   target='_blank'
                 />
               </Link>
               {/* View in Browser Btn Ends */}
             </div>
+            {/* )} */}
+            {/* MODAL ENDS */}
 
             {/* Xs behind the button*/}
 
@@ -121,6 +144,7 @@ export default function ProjectCard({
             {/* Xs behind the button ends*/}
           </div>
         )}
+        {/* EMAIL ENDS */}
       </article>
     </>
   );
