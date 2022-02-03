@@ -62,7 +62,7 @@ export default function ProjectCard({
             </div>
             <div className={`${(isOdd && 'md:pr-6') || 'md:pl-6'} md:w-1/2`}>
               <div className='pt-5 h-full pb-6 md:py-5 border-b border-t border-primary-blue border-opacity-10'>
-                <ReactMarkdown className=' md:min-h-[210px] text-primary-purple-dark prose prose-sm laptop-md:prose-lg text-opacity-80 '>
+                <ReactMarkdown className=' md:min-h-[210px] text-base text-primary-purple-dark text-opacity-80 '>
                   {desc}
                 </ReactMarkdown>
                 {/* <button className='w-24 h-8 bg-primary-purple bg-opacity-50 hover:bg-primary-blue hover:text-primary-purple transition-all duration-300 capitalize text-primary-blue whitespace-nowrap'>

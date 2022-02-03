@@ -17,12 +17,12 @@ export default function AboutMe() {
   } = useGlobalContext();
 
   return (
-    <section className='p-8 bg-primary-purple-light md:pt-14 md:grid md:grid-cols-5 md:justify-items-center md:gap-x-3'>
+    <section className=' p-8 bg-primary-purple-light md:pt-14 md:grid md:grid-cols-5 md:justify-items-center md:gap-x-3'>
       <article className='md:pl-4  col-start-1 col-end-4'>
         <h2 className='text-4xl font-titillium-web font-bold text-primary-purple-dark '>
           {title}
         </h2>
-        <div className='py-6 space-y-3 text-primary-purple-dark text-opacity-80 '>
+        <div className='py-6 text-base space-y-3 text-primary-purple-dark text-opacity-80 '>
           {documentToReactComponents(desc)}
         </div>
       </article>
