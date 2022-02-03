@@ -7,11 +7,9 @@ import Link from 'next/link';
 import PrimaryButton from './../../components/PrimaryButton';
 import { ProjectNavigate } from './../../components/ProjectNavigate';
 import Logo from '../../components/Logo';
+import { getPrevNextProj } from './../../lib';
 
-export default function Project({
-  currProjectData = null,
-  beforeAfterProjects,
-}) {
+export default function Project({ currProjectData = null, prevNextProjects }) {
   if (!currProjectData[0]) return null;
   const {
     fields: {
@@ -24,7 +22,7 @@ export default function Project({
     },
   } = currProjectData[0] && currProjectData[0];
 
-  const [prevProject, nextProject] = beforeAfterProjects;
+  const [prevProject, nextProject] = prevNextProjects;
   const [hero, previewOne, previewTwo] = previewImages;
   const {
     fields: {
@@ -229,19 +227,7 @@ export async function getStaticProps({ params }) {
     return project.fields.projectName === params.id;
   });
 
-  console.log(currProjectData);
+  const prevNextProjects = getPrevNextProj(webProjects, currProjectData);
 
-  const indexCurrProject = webProjects.indexOf(currProjectData);
-
-  let indexPreviousProject = indexCurrProject - 1;
-  if (indexPreviousProject < 0) indexPreviousProject = webProjects.length - 1;
-
-  let indexNextProject = indexCurrProject + 1;
-  if (indexNextProject > webProjects.length - 1) indexNextProject = 0;
-
-  const prevProject = webProjects[indexPreviousProject].fields.projectName;
-  const nextProject = webProjects[indexNextProject].fields.projectName;
-  const beforeAfterProjects = [prevProject, nextProject];
-
-  return { props: { currProjectData, beforeAfterProjects } };
+  return { props: { currProjectData, prevNextProjects } };
 }

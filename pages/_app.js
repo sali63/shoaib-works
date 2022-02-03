@@ -5,9 +5,9 @@ import Layout from './../components/Layout';
 import AppProvider from '../contexts/AppContext';
 import { createClient } from 'contentful';
 
-function MyApp({ Component, pageProps, appData, _appData }) {
+function MyApp({ Component, pageProps, appData }) {
   return (
-    <AppProvider appData={appData} _appData={_appData}>
+    <AppProvider appData={appData}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
@@ -25,9 +25,9 @@ MyApp.getInitialProps = async (appContext) => {
   });
 
   // get all the items from Contenful
-  const { items: _appData } = await client.getEntries();
+  const { items: appData } = await client.getEntries();
 
-  return { ...appProps, _appData };
+  return { ...appProps, appData };
 };
 
 export default MyApp;

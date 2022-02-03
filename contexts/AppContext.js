@@ -6,12 +6,12 @@ import { getAllSortedDataContenful } from '../lib';
 
 const PortfolioContext = createContext();
 
-export default function AppProvider({ children, appData, _appData }) {
+export default function AppProvider({ children, appData }) {
   //
-  _appData = getAllSortedDataContenful(_appData);
+  appData = getAllSortedDataContenful(appData);
 
   return (
-    <PortfolioContext.Provider value={{ ...appData, ..._appData }}>
+    <PortfolioContext.Provider value={{ ...appData }}>
       {children}
     </PortfolioContext.Provider>
   );

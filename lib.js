@@ -64,3 +64,17 @@ export const getAllSortedDataContenful = (allDataContenful = []) => {
     return resultObj;
   }, {});
 };
+
+export const getPrevNextProj = (arr = [], currProjectData = {}) => {
+  const indexCurrProject = arr.indexOf(currProjectData);
+
+  let indexPreviousProject = indexCurrProject - 1;
+  if (indexPreviousProject < 0) indexPreviousProject = arr.length - 1;
+
+  let indexNextProject = indexCurrProject + 1;
+  if (indexNextProject > arr.length - 1) indexNextProject = 0;
+
+  const prevProject = arr[indexPreviousProject].fields.projectName;
+  const nextProject = arr[indexNextProject].fields.projectName;
+  return [prevProject, nextProject];
+};

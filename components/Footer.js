@@ -21,7 +21,7 @@ export default function Footer() {
       {/* add in footer or close to a resource of freepik */}
 
       <a
-        className='text-primary-purple text-opacity-50 block text-center row-start-5 col-span-4'
+        className='hidden md:block text-primary-purple text-opacity-50 text-center row-start-5 col-span-4'
         href={pexelUrl}
         target='_blank'
       >
