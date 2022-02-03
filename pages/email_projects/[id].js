@@ -152,7 +152,7 @@ export async function getStaticPaths() {
   });
   // Make sure your component handles fallback if it is enabled in getStaticPaths. Fallback docs
   // Phew this was the problem
-  return { paths, fallback: false };
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
