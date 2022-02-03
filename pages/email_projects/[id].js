@@ -3,6 +3,7 @@ import React from 'react';
 import { createClient } from 'contentful';
 import { RiComputerLine } from 'react-icons/ri';
 import { BiMobileAlt } from 'react-icons/bi';
+import { useRouter } from 'next/router';
 
 import Logo from '../../components/Logo';
 import cellPhoneImg from '../../public/cellphone.png';
@@ -44,80 +45,85 @@ export const Project = ({
     id === 'mobile' ? setIsMobTab(true) : setIsMobTab(false);
   };
 
-  return (
-    <>
-      <section className='px-8 pb-12 pt-10 bg-primary-purple bg-opacity-30'>
-        <Logo />
-        <article className=' z-0 '>
-          {/* Tabs */}
-          <div className='flex h-10 justify-evenly items-center rounded-full  w-2/3 mx-auto mb-10 '>
-            <div
-              className={`w-1/2 ${
-                !isMobTab &&
-                'bg-primary-purple-light hover:bg-opacity-70 border border-gray-500'
-              }  h-full rounded-tl-full rounded-bl-full  flex justify-center items-center cursor-pointer ${
-                isMobTab && 'scroll-tab-selected bg-opacity-5'
-              }`}
-              onClick={() => handleClick('mobile')}
-            >
-              <BiMobileAlt />
-            </div>
-            <div
-              className={`w-1/2 ${
-                isMobTab &&
-                'bg-primary-purple-light hover:bg-opacity-70 border border-gray-500'
-              } h-full rounded-tr-full rounded-br-full flex justify-center items-center cursor-pointer ${
-                !isMobTab && 'scroll-tab-selected  bg-opacity-5'
-              }`}
-              onClick={() => handleClick('desktop')}
-            >
-              <RiComputerLine />
-            </div>
-          </div>
-          {(isMobTab && (
-            <>
-              {/*  Phone */}
-              <div className='mx-auto h-[702px] w-[344px] max-w-full bg-black py-2 px-3 rounded-3xl relative'>
-                <div className='bg-black absolute min-w-[135px] max-w-[135px] left-1/2 -translate-x-2/4  min-h-[20px] max-h-[20px] z-10 rounded-bl-2xl rounded-br-2xl'>
-                  <div className='curved-corner-topright w-[10px] h-[10px] top-0 left-[-8px] absolute'></div>
-                  <div className='curved-corner-topright w-[10px] h-[10px] top-0 right-[-8px] absolute rotate-[270deg]'></div>
-                </div>
+  const router = useRouter();
 
-                <div className='-z-10 top-0 h-full overflow-y-scroll rounded-2xl custom-scrollbar'>
-                  <Image
-                    src={'https:' + mobScrollUrl}
-                    width={mobScrollImgW}
-                    height={mobScrollImgH}
-                  />
-                </div>
-                <div className='absolute bottom-2 bg-gray-400 left-[14.6px]  w-[calc(100%-1.6rem)] rounded-bl-xl rounded-br-xl'>
-                  <Image src={androidBtmNav} />
-                </div>
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  } else
+    return (
+      <>
+        <section className='px-8 pb-12 pt-10 bg-primary-purple bg-opacity-30'>
+          <Logo />
+          <article className=' z-0 '>
+            {/* Tabs */}
+            <div className='flex h-10 justify-evenly items-center rounded-full  w-2/3 mx-auto mb-10 '>
+              <div
+                className={`w-1/2 ${
+                  !isMobTab &&
+                  'bg-primary-purple-light hover:bg-opacity-70 border border-gray-500'
+                }  h-full rounded-tl-full rounded-bl-full  flex justify-center items-center cursor-pointer ${
+                  isMobTab && 'scroll-tab-selected bg-opacity-5'
+                }`}
+                onClick={() => handleClick('mobile')}
+              >
+                <BiMobileAlt />
               </div>
-              {/*  Phone Ends */}
+              <div
+                className={`w-1/2 ${
+                  isMobTab &&
+                  'bg-primary-purple-light hover:bg-opacity-70 border border-gray-500'
+                } h-full rounded-tr-full rounded-br-full flex justify-center items-center cursor-pointer ${
+                  !isMobTab && 'scroll-tab-selected  bg-opacity-5'
+                }`}
+                onClick={() => handleClick('desktop')}
+              >
+                <RiComputerLine />
+              </div>
+            </div>
+            {(isMobTab && (
+              <>
+                {/*  Phone */}
+                <div className='mx-auto h-[702px] w-[344px] max-w-full bg-black py-2 px-3 rounded-3xl relative'>
+                  <div className='bg-black absolute min-w-[135px] max-w-[135px] left-1/2 -translate-x-2/4  min-h-[20px] max-h-[20px] z-10 rounded-bl-2xl rounded-br-2xl'>
+                    <div className='curved-corner-topright w-[10px] h-[10px] top-0 left-[-8px] absolute'></div>
+                    <div className='curved-corner-topright w-[10px] h-[10px] top-0 right-[-8px] absolute rotate-[270deg]'></div>
+                  </div>
 
-              {/* orig Image */}
-              {/* <div className='pt-4'>
+                  <div className='-z-10 top-0 h-full overflow-y-scroll rounded-2xl custom-scrollbar'>
+                    <Image
+                      src={'https:' + mobScrollUrl}
+                      width={mobScrollImgW}
+                      height={mobScrollImgH}
+                    />
+                  </div>
+                  <div className='absolute bottom-2 bg-gray-400 left-[14.6px]  w-[calc(100%-1.6rem)] rounded-bl-xl rounded-br-xl'>
+                    <Image src={androidBtmNav} />
+                  </div>
+                </div>
+                {/*  Phone Ends */}
+
+                {/* orig Image */}
+                {/* <div className='pt-4'>
                 <Image src={cellPhoneImg}></Image>
               </div> */}
-            </>
-          )) || (
-            // Computer
-            <div className='w-full'>
-              <div className='  max-h-[662px] overflow-y-scroll custom-scrollbar'>
-                <Image
-                  src={'https:' + desktopScrollUrl}
-                  width={desktopScrollImgW}
-                  height={desktopScrollImgH}
-                />
+              </>
+            )) || (
+              // Computer
+              <div className='w-full'>
+                <div className='  max-h-[662px] overflow-y-scroll custom-scrollbar'>
+                  <Image
+                    src={'https:' + desktopScrollUrl}
+                    width={desktopScrollImgW}
+                    height={desktopScrollImgH}
+                  />
+                </div>
               </div>
-            </div>
-            // Computer Ends
-          )}
-        </article>
-      </section>
-    </>
-  );
+              // Computer Ends
+            )}
+          </article>
+        </section>
+      </>
+    );
 };
 // );
 
@@ -146,7 +152,7 @@ export async function getStaticPaths() {
   });
   // Make sure your component handles fallback if it is enabled in getStaticPaths. Fallback docs
   // Phew this was the problem
-  return { paths, fallback: false };
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
