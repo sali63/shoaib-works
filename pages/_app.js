@@ -4,14 +4,23 @@ import 'tailwindcss/tailwind.css';
 import Layout from './../components/Layout';
 import AppProvider from '../contexts/AppContext';
 import { createClient } from 'contentful';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps, appData }) {
   return (
-    <AppProvider appData={appData}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </AppProvider>
+    <>
+      <Head>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1.0, maximum-scale=2.0'
+        />
+      </Head>
+      <AppProvider appData={appData}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AppProvider>
+    </>
   );
 }
 

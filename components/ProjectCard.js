@@ -24,6 +24,7 @@ export default function ProjectCard({
   },
   web,
   isOdd,
+  projectCount,
 }) {
   const [isModal, setIsModal] = React.useState(false);
 
@@ -39,7 +40,7 @@ export default function ProjectCard({
         className={`font-poppins overflow-hidden group \
         
         ${web && 'w-full shadow-none'}
-        ${!web && 'max-h-[500px]'}
+        ${!web && 'max-h-[500px] mt-10 '}
         `}
         onMouseEnter={() => openModal()}
         onMouseLeave={() => setIsModal(false)}

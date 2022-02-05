@@ -12,7 +12,7 @@ export default function WebProjects() {
 
   webProjects = sortByCreatedAt(webProjects).slice(0, 3);
   return (
-    <section className='p-8 bg-primary-purple-light'>
+    <section className='p-8 pb-14 bg-primary-purple-light'>
       <h1 className='capitalize text-4xl text-center font-titillium-web font-bold text-primary-purple-dark pb-8'>
         {webBlockTitle}
       </h1>

@@ -16,12 +16,22 @@ export default function EmailProjects() {
       <h1 className='capitalize text-4xl font-titillium-web font-bold text-primary-purple-light pb-8'>
         {emailBlockTitle}
       </h1>
-      <div className='space-y-5 sm:space-y-0 sm:grid sm:grid-cols-2 sm:w-full sm:justify-items-center'>
+      <div
+        className={`sm:grid sm:grid-cols-2 \
+      sm:w-full sm:justify-items-center \
+      `}
+      >
         {emailProjects.map((project) => {
           const {
             sys: { id },
           } = project;
-          return <ProjectCard key={id} {...project} />;
+          return (
+            <ProjectCard
+              key={id}
+              {...project}
+              projectCount={emailProjects.length}
+            />
+          );
         })}
       </div>
     </section>
