@@ -7,7 +7,7 @@ import Link from 'next/link';
 import PrimaryButton from './../../components/PrimaryButton';
 import { ProjectNavigate } from './../../components/ProjectNavigate';
 import Logo from '../../components/Logo';
-import { getPrevNextProj } from './../../lib';
+import { getPrevNextProj, getProjectMediaFileDetails } from './../../lib';
 
 export default function Project({ currProjectData = null, prevNextProjects }) {
   if (!currProjectData[0]) return null;
@@ -24,41 +24,21 @@ export default function Project({ currProjectData = null, prevNextProjects }) {
 
   const [prevProject, nextProject] = prevNextProjects;
   const [hero, previewOne, previewTwo] = previewImages;
-  const {
-    fields: {
-      file: {
-        details: {
-          image: { width: heroWidth, height: heroHeight },
-        },
-        url: heroUrl,
-      },
-      title: heroTitle,
-    },
-  } = hero;
 
   const {
-    fields: {
-      file: {
-        details: {
-          image: { width: previewOneWidth, height: previewOneHeight },
-        },
-        url: previewOneUrl,
-      },
-      title: previewOneTitle,
-    },
-  } = previewOne;
-
-  const {
-    fields: {
-      file: {
-        details: {
-          image: { width: previewTwoWidth, height: previewTwoHeight },
-        },
-        url: previewTwoUrl,
-      },
-      title: previewTwoTitle,
-    },
-  } = previewTwo;
+    heroTitle,
+    heroWidth,
+    heroHeight,
+    heroUrl,
+    previewOneTitle,
+    previewOneUrl,
+    previewOneWidth,
+    previewOneHeight,
+    previewTwoTitle,
+    previewTwoUrl,
+    previewTwoWidth,
+    previewTwoHeight,
+  } = getProjectMediaFileDetails(previewImages);
 
   const router = useRouter();
 

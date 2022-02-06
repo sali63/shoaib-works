@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const sortByCreatedAt = (arr = [], desc = true) => {
   const sortedArr = arr.sort((a, b) => {
     const {
@@ -77,4 +79,76 @@ export const getPrevNextProj = (arr = [], currProjectData = {}) => {
   const prevProject = arr[indexPreviousProject].fields.projectName;
   const nextProject = arr[indexNextProject].fields.projectName;
   return [prevProject, nextProject];
+};
+
+export const getProjectMediaFileDetails = (fileObj) => {
+  // debugger;
+  if (Array.isArray(fileObj)) {
+    return fileObj.reduce((allFiles, currFile) => {
+      const {
+        fields: {
+          file: {
+            details: {
+              image: { width, height },
+            },
+            url,
+          },
+          title,
+        },
+      } = currFile;
+
+      const pattern = /(\w+)\s(\w+)/g;
+      //
+      const titleKey = pattern.test(title)
+        ? title.replace(pattern, lowerToNoSpaceUpper)
+        : title.trim();
+
+      allFiles[titleKey + 'Width'] = width;
+      allFiles[titleKey + 'Height'] = height;
+      allFiles[titleKey + 'Url'] = url;
+      allFiles[titleKey + 'Title'] = title;
+
+      return allFiles;
+    }, {});
+  } else {
+    const {
+      fields: {
+        scrollImageMobile: {
+          fields: {
+            file: {
+              details: {
+                image: { height: mobScrollImgH, width: mobScrollImgW },
+              },
+              url: mobScrollUrl,
+            },
+          },
+        },
+        scrollImageDesktop: {
+          fields: {
+            file: {
+              details: {
+                image: { height: desktopScrollImgH, width: desktopScrollImgW },
+              },
+              url: desktopScrollUrl,
+            },
+          },
+        },
+      },
+    } = fileObj;
+
+    return {
+      mobScrollImgH,
+      mobScrollImgW,
+      mobScrollUrl,
+      desktopScrollImgH,
+      desktopScrollImgW,
+      desktopScrollUrl,
+    };
+  }
+};
+
+const lowerToNoSpaceUpper = (match, str1, str2) => {
+  // debugger;
+  str2 = str2.charAt(0).toUpperCase() + str2.substr(1);
+  return str1 + str2;
 };

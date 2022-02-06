@@ -10,36 +10,22 @@ import cellPhoneImg from '../../public/cellphone.png';
 import androidBtmNav from '../../public/android-btm-nav.png';
 
 import Image from 'next/image';
+import { getProjectMediaFileDetails } from '../../lib';
 
 //Uncomment below and the closing parenthesis if trying to use ref in Next.js
 export const Project = ({
   currProjectData = null,
 }) /*React.forwardRef(({ currProjectData }, ref)*/ => {
   const [isMobTab, setIsMobTab] = React.useState(true);
+
   const {
-    fields: {
-      scrollImageMobile: {
-        fields: {
-          file: {
-            details: {
-              image: { height: mobScrollImgH, width: mobScrollImgW },
-            },
-            url: mobScrollUrl,
-          },
-        },
-      },
-      scrollImageDesktop: {
-        fields: {
-          file: {
-            details: {
-              image: { height: desktopScrollImgH, width: desktopScrollImgW },
-            },
-            url: desktopScrollUrl,
-          },
-        },
-      },
-    },
-  } = currProjectData[0] && currProjectData[0];
+    mobScrollImgH,
+    mobScrollImgW,
+    mobScrollUrl,
+    desktopScrollImgH,
+    desktopScrollImgW,
+    desktopScrollUrl,
+  } = getProjectMediaFileDetails(currProjectData[0]);
 
   const handleClick = (id) => {
     id === 'mobile' ? setIsMobTab(true) : setIsMobTab(false);
@@ -169,18 +155,6 @@ export async function getStaticProps({ params }) {
   const currProjectData = emailProjects.filter((project) => {
     return project.fields.projectName === params.id;
   });
-
-  // const indexCurrProject = webProjects.indexOf(currProjectData);
-
-  // let indexPreviousProject = indexCurrProject - 1;
-  // if (indexPreviousProject < 0) indexPreviousProject = webProjects.length - 1;
-
-  // let indexNextProject = indexCurrProject + 1;
-  // if (indexNextProject > webProjects.length - 1) indexNextProject = 0;
-
-  // const prevProject = webProjects[indexPreviousProject].fields.projectName;
-  // const nextProject = webProjects[indexNextProject].fields.projectName;
-  // const beforeAfterProjects = [prevProject, nextProject];
 
   return { props: { currProjectData } };
 }

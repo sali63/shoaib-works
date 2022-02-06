@@ -25,13 +25,7 @@ export default function EmailProjects() {
           const {
             sys: { id },
           } = project;
-          return (
-            <ProjectCard
-              key={id}
-              {...project}
-              projectCount={emailProjects.length}
-            />
-          );
+          return <ProjectCard key={id} {...project} />;
         })}
       </div>
     </section>
