@@ -122,11 +122,11 @@ export const Project = ({
         </section>
         {/* Open in Browser Link */}
         <section className='relative'>
-          <article className='cursor-pointer  absolute left-1/2 -translate-x-1/2 top-[-3.65rem]'>
+          <article className='absolute left-1/2 -translate-x-1/2 !top-[-1.8rem]'>
             <Link href={siteUrl} passHref>
               <SecondaryButton
                 btnText='view in browser'
-                className='block h-full w-40 group space-x-4 py-3'
+                className='!w-44 group !space-x-4 !pb-3 !m-0'
                 target='_blank'
               >
                 <MdOpenInBrowser className='ml-1 absolute group-hover:text-primary-purple-light text-xl' />

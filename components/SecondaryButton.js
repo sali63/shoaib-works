@@ -16,7 +16,8 @@ const SecondaryButton = React.forwardRef(
   ) => {
     return (
       <a
-        className={`no-underline w-32 cursor-pointer text-center \
+        className={`${additionalClasses || className}
+        no-underline w-32 cursor-pointer text-center \
         
         py-1 my-6 text-sm inline-block border border-primary-blue \
 
@@ -29,7 +30,7 @@ const SecondaryButton = React.forwardRef(
           'bg-primary-blue text-primary-purple-light \
           active:bg-primary-purple-light active:text-primary-blue  laptop-sm:hover:bg-primary-purple-light laptop-sm:hover:text-primary-blue'
         } 
-        ${additionalClasses || className}`}
+        `}
         //
         ref={ref}
         onClick={onClick}
