@@ -68,6 +68,7 @@ export const getAllSortedDataContenful = (allDataContenful = []) => {
 };
 
 export const getPrevNextProj = (arr = [], currProjectData = {}) => {
+  debugger;
   const indexCurrProject = arr.indexOf(currProjectData);
 
   let indexPreviousProject = indexCurrProject - 1;

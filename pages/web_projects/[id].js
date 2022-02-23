@@ -23,7 +23,6 @@ export default function Project({ currProjectData = null, prevNextProjects }) {
   } = currProjectData[0] && currProjectData[0];
 
   const [prevProject, nextProject] = prevNextProjects;
-  const [hero, previewOne, previewTwo] = previewImages;
 
   const {
     heroTitle,
@@ -178,7 +177,6 @@ export async function getStaticPaths() {
       fields: { projectName },
     } = project;
     //
-    console.log('from getStaticPaths', projectName);
     return {
       params: {
         id: projectName,
@@ -207,7 +205,8 @@ export async function getStaticProps({ params }) {
     return project.fields.projectName === params.id;
   });
 
+  // console.log(webProjects);
   const prevNextProjects = getPrevNextProj(webProjects, currProjectData);
 
-  return { props: { currProjectData, prevNextProjects } };
+  return { props: { currProjectData, prevNextProjects, webProjects } };
 }

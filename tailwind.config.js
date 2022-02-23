@@ -1,5 +1,6 @@
 const plugin = require('tailwindcss/plugin');
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   mode: 'jit',
@@ -146,6 +147,17 @@ module.exports = {
           'background-color': 'rgb(16 43 63 / 4%)',
         },
         // }
+        '.round-bicolor-btn': {
+          background: theme('colors.primary-purple'),
+
+          background:
+            'linear-gradient(180deg, rgba(194, 160, 228, 0.3) 0%, rgba(194, 160, 228, 0.3) 70%, theme(colors.primary-purple.light) 70%, theme(colors.primary-purple.light) 100%)',
+          //
+          '&:hover': {
+            background:
+              'linear-gradient(180deg, theme(colors.primary-purple.DEFAULT) 0%, theme(colors.primary-purple.DEFAULT) 100% )',
+          },
+        },
       });
 
       // addComponents(buttons);

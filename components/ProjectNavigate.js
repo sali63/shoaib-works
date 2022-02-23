@@ -4,6 +4,7 @@ import React from 'react';
 // export const ProjectNavigate = ({ projectName, left }) => {
 export const ProjectNavigate = React.forwardRef(
   ({ onClick, href, projectName, left, routerAsPath }, ref) => {
+    // debugger;
     return (
       routerAsPath !== href && (
         <a

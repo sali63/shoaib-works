@@ -3,20 +3,30 @@ import React from 'react';
 import { createClient } from 'contentful';
 import { RiComputerLine } from 'react-icons/ri';
 import { BiMobileAlt } from 'react-icons/bi';
+
+import { MdOpenInBrowser } from 'react-icons/md';
+
 import { useRouter } from 'next/router';
+import { ProjectNavigate } from './../../components/ProjectNavigate';
 
 import Logo from '../../components/Logo';
-import cellPhoneImg from '../../public/cellphone.png';
+// import cellPhoneImg from '../../public/cellphone.png';
 import androidBtmNav from '../../public/android-btm-nav.png';
 
 import Image from 'next/image';
+import Link from 'next/link';
+
 import { getProjectMediaFileDetails } from '../../lib';
+import { getPrevNextProj } from './../../lib';
+import SecondaryButton from '../../components/SecondaryButton';
 
 //Uncomment below and the closing parenthesis if trying to use ref in Next.js
 export const Project = ({
   currProjectData = null,
+  prevNextProjects,
 }) /*React.forwardRef(({ currProjectData }, ref)*/ => {
   const [isMobTab, setIsMobTab] = React.useState(true);
+  const [prevProject, nextProject] = prevNextProjects;
 
   const {
     mobScrollImgH,
@@ -26,6 +36,8 @@ export const Project = ({
     desktopScrollImgW,
     desktopScrollUrl,
   } = getProjectMediaFileDetails(currProjectData[0]);
+
+  const { siteUrl } = currProjectData[0].fields;
 
   const handleClick = (id) => {
     id === 'mobile' ? setIsMobTab(true) : setIsMobTab(false);
@@ -38,11 +50,11 @@ export const Project = ({
   } else
     return (
       <>
-        <section className='px-8 pb-12 pt-10 bg-primary-purple bg-opacity-30'>
+        <section className='px-8 pb-20 pt-10 bg-primary-purple/30 relative'>
           <Logo />
           <article className=' z-0 '>
             {/* Tabs */}
-            <div className='flex h-10 justify-evenly items-center rounded-full  w-2/3 mx-auto mb-10 '>
+            <div className='flex h-10 justify-evenly items-center rounded-full max-w-xs w-2/3 mx-auto mb-10 '>
               <div
                 className={`w-1/2 ${
                   !isMobTab &&
@@ -108,6 +120,41 @@ export const Project = ({
             )}
           </article>
         </section>
+        {/* Open in Browser Link */}
+        <section className='relative'>
+          <article className='cursor-pointer  absolute left-1/2 -translate-x-1/2 top-[-3.65rem]'>
+            <Link href={siteUrl} passHref>
+              <SecondaryButton
+                btnText='view in browser'
+                className='block h-full w-40 group space-x-4 py-3'
+                target='_blank'
+              >
+                <MdOpenInBrowser className='ml-1 absolute group-hover:text-primary-purple-light text-xl' />
+              </SecondaryButton>
+            </Link>
+          </article>
+        </section>
+
+        <section className='border-t-2 border-b-2 flex max-w-full border-secondary-gray mt-12 mb-32 w-11/12 mx-auto'>
+          <Link href={`/email_projects/${prevProject}`} passHref>
+            <ProjectNavigate
+              projectName={prevProject}
+              left
+              routerAsPath={router.asPath}
+            />
+          </Link>
+
+          <Link
+            href={`/email_projects/${nextProject}`}
+            passHref
+            routerAsPath={router.asPath}
+          >
+            <ProjectNavigate
+              projectName={nextProject}
+              routerAsPath={router.asPath}
+            />
+          </Link>
+        </section>
       </>
     );
 };
@@ -155,6 +202,7 @@ export async function getStaticProps({ params }) {
   const currProjectData = emailProjects.filter((project) => {
     return project.fields.projectName === params.id;
   });
+  const prevNextProjects = getPrevNextProj(emailProjects, currProjectData);
 
-  return { props: { currProjectData } };
+  return { props: { currProjectData, prevNextProjects } };
 }
