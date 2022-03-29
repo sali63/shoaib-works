@@ -11,7 +11,7 @@ function WebCardDesc({ desc, projectName }) {
       {/* <button className='w-24 h-8 bg-primary-purple bg-opacity-50 hover:bg-primary-blue hover:text-primary-purple transition-all duration-300 capitalize text-primary-blue whitespace-nowrap'>
                 view project
               </button> */}
-      <Link href={`web_projects/${projectName}`} passHref>
+      <Link href={`/web_projects/${projectName}`} passHref>
         <PrimaryButton
           btnText='view project'
           // additionalClasses='w-44'
